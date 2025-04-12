@@ -1,0 +1,176 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+/* Header */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 1.5em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo h1 {
+    font-family: 'Montserrat', sans-serif;  /* Custom font for logo */
+    font-size: 2.5em;
+    font-weight: bold;
+    color: white;
+    margin: 0;
+    letter-spacing: 2px;
+    text-transform: lowercase;  /* Makes all letters lowercase */
+}
+
+header .logo h1 span {
+    text-transform: uppercase;  /* Makes the "U" and "F" uppercase */
+}
+
+/* Navigation */
+nav a {
+    color: white;
+    margin: 0 1em;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+nav a:hover {
+    border-bottom: 2px solid white;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 2em;
+    background-color: #e8f5e9;
+}
+
+.hero-img {
+    width: 100%;
+    max-height: 400px;
+    object-fit: cover;
+    border-bottom: 4px solid #4CAF50;
+    margin-bottom: 1em;
+}
+
+.hero h2 {
+    font-size: 3em;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.hero p {
+    font-size: 1.2em;
+    color: #666;
+}
+
+/* User Links Section */
+.user-links {
+    padding: 2em;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+.user-links h3 {
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 1.5em;
+}
+
+.user-options {
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+    flex-wrap: wrap;
+}
+
+.card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1em;
+    width: 280px;
+    background-color: #f9f9f9;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+}
+
+.card-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 1em;
+}
+
+.card h4 {
+    font-size: 1.4em;
+    margin-bottom: 0.5em;
+    color: #333;
+}
+
+.card p {
+    font-size: 1em;
+    color: #666;
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 1em;
+    padding: 0.6em 1.2em;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+/* Why Us Section */
+.why-us {
+    padding: 2em;
+    background-color: #f0fff4;
+    text-align: center;
+}
+
+.why-us h3 {
+    font-size: 2.5em;
+    margin-bottom: 1.5em;
+    color: #333;
+}
+
+.why-us ul {
+    list-style: none;
+    padding: 0;
+}
+
+.why-us li {
+    margin: 0.7em 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1em;
+    background-color: #333;
+    color: white;
+}
+
+footer p {
+    font-size: 1.2em;
+    color: #fff;
+}
