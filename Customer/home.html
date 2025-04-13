@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <!--font awesome cdn link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    
+    <link rel="stylesheet" href="home.css">
+    <title>Customer</title>
+</head>
+<body>
+
+    <header class="header">
+        <a href="#" class="logo"><i class="fa fa-shopping-basket"></i>UrbanFood.</a>
+        <nav class="navbar">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#orders">Orders</a>
+            <a href="#supplierProfiles">Supplier</a>
+        </nav>
+
+        <div class="icons">
+            <div class="fas fa-bars" id="menu-btn"></div>
+            <div class="fas fa-search" id="search-btn"></div>
+            <div class="fas fa-shopping-cart" id="cart-btn"></div>
+            <div class="fas fa-user" id="login-btn"></div>
+        </div>
+
+        <form action="" class="search-form">
+            <input type="search" id="search-box" placeholder="search here...">
+            <label for="search-box" class="fas fa-search"></label>
+        </form>
+
+        <div class="shopping-cart">
+            <div class="box">
+                <i class="fas fa-trash"></i>
+                <img src="../Images/watermelon.jpg" alt="">
+                <div class="content">
+                    <h3>Watermelon</h3>
+                    <span class="price">Rs.1000</span>
+                    <span class="quantity">qty : 1</span>
+                </div>
+            </div>
+        
+        
+            <div class="box">
+                <i class="fas fa-trash"></i>
+                <img src="../Images/Chocolate Chips Muffins" alt="">
+                <div class="content">
+                    <h3>Muffins</h3>
+                    <span class="price">Rs.600</span>
+                    <span class="quantity">qty : 4</span>
+                </div>
+            </div>
+        
+      
+            <div class="box">
+                <i class="fas fa-trash"></i>
+                <img src="../Images/brinjal.jpg" alt="">
+                <div class="content">
+                    <h3>Brinjal</h3>
+                    <span class="price">Rs.300</span>
+                    <span class="quantity">qty : 250g</span>
+                </div>
+            </div>
+
+            <div class="total">total - Rs:1650.00</div>
+            <a href="#" class="btn">checkout</a>
+        </div>
+    </header>
+
+    <!--Home section start-->
+    <section class="home" id="home">
+        <div class="content">
+            <h3>Taste the Goodness of <span>Urban</span>  Living</h3>
+            <p>UrbanFood brings you farm-fresh vegetables, seasonal fruits, homemade dairy, warm baked goods, and one-of-a-kind handcrafted items <br> all in one place.</p>
+            <a href="#" class="btn">shop now</a>
+        </div>
+    </section>
+
+    <!--Home section end-->
+
+    <!--Features section Start-->
+    <section class="features" id="features">
+        <h1 class="heading">our <span> features</span></h1>
+        <div class="box-container">
+            <div class="box">
+                <img src="../Images/organic.jpg" alt="">
+                <h3>fresh and organic</h3>
+                <p>At UrbanFood, we bring you fresh and organic products straight from local farmers and producers.</p>
+            </div>
+
+            <div class="box">
+                <img src="../Images/easy pay.jpg" alt="">
+                <h3>easy payments</h3>
+                <p>Shopping with UrbanFood is hassle-free! We offer secure and easy payment options, so you can quickly pay for your favorite fresh and organic products.</p>
+            </div>
+
+            <div class="box">
+                <img src="../Images/supplier clip.jpg" alt="">
+                <h3>our suppliers</h3>
+                <p>At UrbanFood, we work with trusted local farmers and small producers who care about quality and sustainability. </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!--Features section end-->
+
+    <!--Product section starts-->
+    <div class="products" id="products">
+        <h1 class="heading">our <span>products</span></h1>
+
+        <div class="swiper products-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide box">
+                    <img src="../Images/gennady-zakharin-YrsxrFiQcYo-unsplash.jpg" alt="">
+                    <h3>vegetables</h3>
+                    <a href="#" class="btn">see more</a>
+                </div>
+                <div class="swiper-slide box">
+                    <img src="../Images/fruits.jpg" alt="">
+                    <h3>fruirts</h3>
+                    <a href="#" class="btn">see more</a>
+                </div>
+                <div class="swiper-slide box">
+                    <img src="../Images/dairy-products.jpg" alt="">
+                    <h3>dairy products</h3>
+                    <a href="#" class="btn">see more</a>
+                </div>
+                <div class="swiper-slide box">
+                    <img src="../Images/baked goods.jpg" alt="">
+                    <h3>baked goods</h3>
+                    <a href="#" class="btn">see more</a>
+                </div>
+                <div class="swiper-slide box">
+                    <img src="../Images/hero.jpg" alt="">
+                    <h3>handmade crafts</h3>
+                    <a href="#" class="btn">see more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <!--Product section ends-->
+
+
+
+
+
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script src="home.js"></script>
+</body>
+</html>
