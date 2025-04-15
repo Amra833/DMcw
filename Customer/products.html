@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>UrbanFood Products</title>
+  <link rel="stylesheet" href="products.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+<!-- Header -->
+<header class="header">
+  <a href="#" class="logo"><i class="fa fa-shopping-basket"></i> UrbanFood</a>
+  <nav class="navbar">
+    <a href="home.html">Home</a>
+    <a href="#products">Products</a>
+    <a href="orders.html">Orders</a>
+    <a href="suppliers.html">Suppliers</a>
+  </nav>
+
+  <div class="icons">
+    <div class="fas fa-bars" id="menu-btn"></div>
+    <div class="fas fa-search" id="search-btn"></div>
+    <a href="cart.html"><div class="fas fa-shopping-cart" id="cart-btn"></div></a>
+    <div class="fas fa-user" id="login-btn"></div>
+  </div>
+
+    <form action="" class="search-form">
+        <input type="search" id="search-box" placeholder="search here...">
+        <label for="search-box" class="fas fa-search"></label>
+    </form>
+</header>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-overlay">
+    <h1>Discover Fresh & Local Products</h1>
+  </div>
+</section>
+
+<!-- Product Sections -->
+<section id="products">
+
+    <div class="category-section" id="fruits">
+        <h2>Fruits</h2>
+        <div class="product-grid">
+          <div class="product-card">
+            <img src="images/products/apple.jpg" alt="Apple">
+            <h3>Apple</h3>
+            <p>Rs. 50 per unit</p>
+            <button onclick="addToCart('Apple', 50)">Add to Cart</button>
+          </div>
+          <div class="product-card">
+            <img src="images/products/banana.jpg" alt="Banana">
+            <h3>Banana</h3>
+            <p>Rs. 15 per piece</p>
+            <button onclick="addToCart('Banana', 15)">Add to Cart</button>
+          </div>
+          <div class="product-card">
+            <img src="images/products/mango.jpg" alt="Mango">
+            <h3>Mango</h3>
+            <p>Rs. 100 per unit</p>
+            <button onclick="addToCart('Mango', 100)">Add to Cart</button>
+          </div>
+        </div>
+      </div>
+  <!-- Vegetables -->
+  <div class="category-section" id="vegetables">
+    <h2>Vegetables</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="images/products/carrot.jpg" alt="Carrot">
+        <h3>Carrot</h3>
+        <p>Rs. 40 per kg</p>
+        <button onclick="addToCart('Carrot', 40)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="images/products/tomato.jpg" alt="Tomato">
+        <h3>Tomato</h3>
+        <p>Rs. 35 per kg</p>
+        <button onclick="addToCart('Tomato', 35)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="images/products/beans.jpg" alt="Beans">
+        <h3>Beans</h3>
+        <p>Rs. 60 per kg</p>
+        <button onclick="addToCart('Beans', 60)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dairy -->
+  <div class="category-section" id="dairy">
+    <h2>Dairy</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="images/products/milk.jpg" alt="Milk">
+        <h3>Milk</h3>
+        <p>Rs. 80 per liter</p>
+        <button onclick="addToCart('Milk', 80)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="images/products/cheese.jpg" alt="Cheese">
+        <h3>Cheese</h3>
+        <p>Rs. 250 per pack</p>
+        <button onclick="addToCart('Cheese', 250)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="images/products/yogurt.jpg" alt="Yogurt">
+        <h3>Yogurt</h3>
+        <p>Rs. 60 per cup</p>
+        <button onclick="addToCart('Yogurt', 60)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Baked Goods -->
+  <div class="category-section" id="baked-goods">
+    <h2>Baked Goods</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="images/products/bread.jpg" alt="Bread">
+        <h3>Bread</h3>
+        <p>Rs. 50 per loaf</p>
+        <button onclick="addToCart('Bread', 50)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="images/products/cake.jpg" alt="Cake">
+        <h3>Cake</h3>
+        <p>Rs. 600 per cake</p>
+        <button onclick="addToCart('Cake', 600)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="images/products/muffin.jpg" alt="Muffin">
+        <h3>Muffin</h3>
+        <p>Rs. 120 per pack</p>
+        <button onclick="addToCart('Muffin', 120)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Crafts -->
+  <div class="category-section" id="crafts">
+    <h2>Crafts</h2>
+    <div class="product-grid">
+      <div class="product-card">
+        <img src="images/products/handmade-basket.jpg" alt="Handmade Basket">
+        <h3>Handmade Basket</h3>
+        <p>Rs. 450 each</p>
+        <button onclick="addToCart('Handmade Basket', 450)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="images/products/pottery.jpg" alt="Pottery">
+        <h3>Pottery</h3>
+        <p>Rs. 300 each</p>
+        <button onclick="addToCart('Pottery', 300)">Add to Cart</button>
+      </div>
+      <div class="product-card">
+        <img src="images/products/coconut-shell-art.jpg" alt="Coconut Shell Art">
+        <h3>Coconut Shell Art</h3>
+        <p>Rs. 200 each</p>
+        <button onclick="addToCart('Coconut Shell Art', 200)">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Add To Cart Script -->
+<script>
+  function addToCart(name, price) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const index = cart.findIndex(item => item.name === name);
+    if (index !== -1) {
+      cart[index].qty += 1;
+    } else {
+      cart.push({ name: name, price: price, qty: 1 });
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(name + " added to cart!");
+  }
+</script>
+
+</body>
+</html>

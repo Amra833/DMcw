@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Cart - UrbanFood</title>
+  <link rel="stylesheet" href="cart.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="#" class="logo"><i class="fa fa-shopping-basket"></i> UrbanFood</a>
+    <nav class="navbar">
+      <a href="home.html">Home</a>
+      <a href="#products">Products</a>
+      <a href="orders.html">Orders</a>
+      <a href="suppliers.html">Suppliers</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-overlay">
+      <h1>Your Cart</h1>
+    </div>
+  </section>
+
+  <!-- Cart Section -->
+  <div id="cart-container">
+    <table id="cart-table">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Price (Rs.)</th>
+          <th>Quantity</th>
+          <th>Subtotal (Rs.)</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody id="cart-items"></tbody>
+    </table>
+
+    <div id="cart-total">
+      <strong>Total: Rs. <span id="total-amount">0</span></strong>
+    </div>
+
+    <button id="checkout-btn" onclick="goToCheckout()">Proceed to Checkout</button>
+  </div>
+
+  <script>
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const tbody = document.getElementById("cart-items");
+      let total = 0;
+      tbody.innerHTML = "";
+
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.qty;
+        total += subtotal;
+
+        const row = `
+          <tr>
+            <td>${item.name}</td>
+            <td>${item.price}</td>
+            <td>${item.qty}</td>
+            <td>${subtotal}</td>
+            <td><button onclick="removeItem(${index})">Remove</button></td>
+          </tr>
+        `;
+        tbody.innerHTML += row;
+      });
+
+      document.getElementById("total-amount").textContent = total;
+    }
+
+    function removeItem(index) {
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      cart.splice(index, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      loadCart();
+    }
+
+    function goToCheckout() {
+      window.location.href = "order.html";
+    }
+
+    window.onload = loadCart;
+  </script>
+
+</body>
+</html>
