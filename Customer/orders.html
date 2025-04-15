@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet"href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+
+    <!--font awesome cdn link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <title>Place Order | UrbanFood</title>
+    <link rel="stylesheet" href="order.css">
+</head>
+<body>
+    <header class="header">
+        <a href="#" class="logo"><i class="fa fa-shopping-basket"></i>UrbanFood</a>
+        <nav class="navbar">
+            <a href="home.html">Home</a>
+            <a href="#products">Products</a>
+            <a href="orders.html">Orders</a>
+            <a href="suppliers.html">Suppliers</a>
+        </nav>
+    </header>
+    
+  <div class="order-container">
+    <h2>Place Your Order</h2>
+    <form action="process_order.php" method="POST">
+      <label for="name">Full Name</label>
+      <input type="text" id="name" name="name" placeholder="John Doe" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="john@example.com" required>
+
+      <label for="product">Select Product</label>
+      <select id="product" name="product" required>
+        <option value="">-- Choose a product --</option>
+        <option value="Fresh Tomatoes">Fresh Tomatoes</option>
+        <option value="Organic Carrots">Organic Carrots</option>
+        <option value="Farm Eggs">Farm Eggs</option>
+        <option value="Green Leafy Veggies">Green Leafy Veggies</option>
+      </select>
+
+      <label for="quantity">Quantity</label>
+      <input type="number" id="quantity" name="quantity" min="1" value="1" required>
+
+      <label for="address">Delivery Address</label>
+      <textarea id="address" name="address" placeholder="123 Green Street, Colombo" rows="4" required></textarea>
+
+      <button type="submit">Submit Order</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+<section class="footer">
+    <div class="box-container">
+      <div class="box">
+        <h3>UrbanFood <i class="fas fa-shopping-basket"></i></h3>
+        <p>Bridging the gap between local growers and urban consumers.</p>
+        <div class="share">
+          <a href="#" class="fab fa-facebook-f"></a>
+          <a href="#" class="fab fa-twitter"></a>
+          <a href="#" class="fab fa-instagram"></a>
+          <a href="#" class="fab fa-linkedin"></a>
+        </div>
+      </div>
+  
+      <div class="box">
+        <h3>Quick Links</h3>
+        <a href="home.html">Home</a>
+        <a href="#products">Products</a>
+        <a href="suppliers.html">Suppliers</a>
+        <a href="#contact">Contact</a>
+      </div>
+  
+      <div class="box">
+        <h3>Contact Info</h3>
+        <a href="#">+94 76 123 4567</a>
+        <a href="#">urbanfood@gmail.com</a>
+        <a href="#">Colombo, Sri Lanka</a>
+      </div>
+    </div>
+  
+    <div class="credit">© 2025 UrbanFood | All rights reserved</div>
+  </section>
+
+</body>
+</html>
