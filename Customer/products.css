@@ -207,7 +207,7 @@ body {
 .hero {
   position: relative;
   height: 60vh;
-  background: url('../Images/pexels-picjumbo-com-55570-196643.jpg') no-repeat center center/cover;
+  background: url('../Images/pexels-yaroslav-shuraev-8845420.jpg') no-repeat center center/cover;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -260,6 +260,15 @@ body {
   box-shadow: var(--box-shadow);
   transition: transform 0.3s;
 }
+
+.product-card img {
+  width: 100%;  /* Ensures the image takes up the full width of the card */
+  height: auto;  /* Maintains the aspect ratio of the image */
+  object-fit: cover;  /* Ensures the image covers the area without distorting */
+  max-height: 200px;  /* Limits the height to a fixed value */
+  border-radius: 1rem;  /* Optional: If you want rounded corners on images as well */
+}
+
 
 .product-card:hover {
   transform: translateY(-5px);

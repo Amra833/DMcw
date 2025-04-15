@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;1,100&display=swap');
+
 :root{
     --orange:#ff7800;
     --black:#130f40;
@@ -15,8 +16,7 @@
     --white: #fff;
     --gray: #777;
     --border: 0.1rem solid rgba(0, 0, 0, 0.1);
-}
-
+}      
 *{
     font-family: "Poppins", sans-serif;
     margin: 0;padding: 0;
@@ -29,182 +29,186 @@
 }
 
 html{
-    font-size: 62.5%;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    scroll-padding-top: 7rem;
+  font-size: 62.5%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 7rem;
 }
 
-body{
-    background: #eee;
+/*body {
+  background: #f9f9f9;
+  padding-top: 10rem;
+}*/
+
+body {
+  background: url('https://www.transparenttextures.com/patterns/green-cup.png');
+  background-color: #f9f9f9;
+  padding-top: 10rem;
+  background-attachment: fixed;
 }
 
-section{
-    padding: 2rem 9%;
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;left: 0;right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem 9%;
+  background: #fff;
+  box-shadow: var(--box-shadow);
 }
 
-.heading{
-    text-align: center;
-    padding: 2rem 0;
-    padding-bottom: 3rem;
-    font-size: 3.5rem;
-    color: var(--black);
-} 
-.heading span{
-    background: var(--orange);
-    color: #fff;
-    display: inline-block;
-    padding: 0.5rem 1.5rem;
-    clip-path: polygon(100% 0, 93% 50%, 100% 99%, 0% 100%, 7% 50%, 0% 0);
-}
-.btn{
-    margin-top: 1rem;
-    display: inline-block;
-    padding:.8rem 3rem;
-    font-size: 1.3rem;
-    border-radius: .5rem;
-    border: .2rem solid var(--black);
-    color: var(--black);
-    cursor: pointer;
-    background: none;
-}
-
-.btn:hover{
-    background: var(--orange);
-    color: #eee;
-}
-
-.header{
-    position: fixed;
-    top: 0;left: 0;right: 0;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2rem 9%;
-    background: #fff;
-    box-shadow: var(--box-shadow);
-}
-
-.header .logo{
-    font-size: 2.5rem;
-    font-weight: bolder;
-    color: var(--black);
+.header .logo {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--black);
 }
 
 .header .logo i{
-    color: var(--orange);
+  margin-right: 0.5rem;
+  color: var(--orange);
 }
 
 .header .navbar a{
-    font-size: 1.7rem;
-    margin: 0 1rem;
-    color: var(--black);
+  font-size: 1.6rem;
+  margin: 0 1.2rem;
+  color: var(--dark);
 }
 
 .header .navbar a:hover{
-    color: var(--orange);
+  color: var(--orange);
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f4f8;
-    margin: 0;
-    padding: 0;
-  }
-  
-  .order-container {
-    background: #fff;
-    max-width: 600px;
-    margin: 50px auto;
-    padding: 30px 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-  
-  .order-container h2 {
-    text-align: center;
-    color: #2b9348;
-    margin-bottom: 25px;
-  }
-  
-  form label {
-    display: block;
-    margin: 12px 0 6px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  form input,
-  form select,
-  form textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 16px;
-  }
-  
-  form button {
-    margin-top: 20px;
-    width: 100%;
-    padding: 12px;
-    font-size: 16px;
-    background-color: #2b9348;
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  form button:hover {
-    background-color: #238636;
-  }
+.header .icons div{
+  height: 4.5rem;
+  width: 4.5rem;
+  line-height: 4.5rem;
+  border-radius: .5rem;
+  background: #eee;
+  color: var(--black);
+  font-size: 2rem;
+  cursor: pointer;
+  margin-right: .3rem;
+  text-align: center;
+}
 
-  /* Footer */
-  .footer {
-    background: var(--dark);
-    color: var(--white);
-    padding: 4rem 9%;
-    margin-top: 4rem;
-  }
-  
-  .footer .box-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
-    gap: 2rem;
-  }
-  
-  .footer .box h3 {
-    font-size: 2rem;
-    color: var(--white);
-    margin-bottom: 1rem;
-  }
-  
-  .footer .box a {
-    display: block;
-    font-size: 1.4rem;
-    color: var(--gray);
-    margin: 0.5rem 0;
-  }
-  
-  .footer .box a:hover {
-    color: var(--green);
-  }
-  
-  .footer .share a {
-    font-size: 2rem;
-    color: var(--white);
-    margin-right: 1rem;
-  }
-  
-  .footer .credit {
-    text-align: center;
-    padding-top: 2rem;
-    font-size: 1.4rem;
-    color: var(--gray);
-    border-top: var(--border);
-    margin-top: 2rem;
-  }
-  
+.header .icons div:hover{
+  background: var(--orange);
+  color: #fff;
+}
+
+.header .shopping-cart{
+  position: absolute;
+  top:110%; right: -110%;
+  padding: 1rem;
+  border-radius: .5rem;
+  box-shadow: var(--box-shadow);
+  width: 35rem;
+  background: #fff;
+}
+
+/* Section Titles */
+/*section h2 {
+  font-size: 2.4rem;
+  margin-bottom: 15px;
+  color: #2c3e50;
+}*/
+
+.cart-summary h2,
+.order-form h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 2rem;
+}
+
+/* Cart Summary Section */
+.cart-summary {
+  font-size: 1.6rem;
+  background: var(--white);
+  padding: 3rem;
+  border-radius: 1.2rem;
+  margin: 3rem auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  max-width: 1000px;
+}
+
+.cart-summary table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 2rem;
+}
+
+.cart-summary th,
+.cart-summary td {
+  border: 1px solid var(--gray);
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 1.7rem;
+}
+
+.cart-summary th {
+  background-color: var(--light-orange);
+  color: var(--black);
+  font-weight: 600;
+}
+
+.cart-summary p {
+  font-size: 2rem;
+  text-align: right;
+}
+
+/* Order Form Section */
+.order-form {
+  background: var(--white);
+  padding: 3rem;
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+  max-width: 800px;
+  margin: 0 auto 4rem auto;
+}
+
+.order-form form label {
+  display: block;
+  margin-top: 2rem;
+  font-weight: 600;
+  color: var(--black);
+  font-size: 1.8rem;
+}
+
+.order-form form input,
+.order-form form textarea {
+  width: 100%;
+  padding: 1.5rem;
+  margin-top: 0.8rem;
+  border-radius: 0.8rem;
+  border: 1px solid #ccc;
+  font-size: 1.7rem;
+  background-color: #fdfdfd;
+  transition: border 0.3s;
+}
+
+.order-form form input:focus,
+.order-form form textarea:focus {
+  border: 1.5px solid var(--green);
+  outline: none;
+}
+
+.order-form form button {
+  margin-top: 3rem;
+  background-color: var(--green);
+  color: white;
+  border: none;
+  padding: 1.5rem 3rem;
+  font-size: 1.8rem;
+  border-radius: 0.8rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.order-form form button:hover {
+  background-color: #219653;
+  transform: scale(1.02);
+}
