@@ -5,6 +5,7 @@ $username = 'system';         // Oracle DB username
 $password = 'system';         // Oracle DB password
 $connection_string = 'localhost/XEPDB1';
 
+// Establish Oracle connection
 $conn = oci_connect($username, $password, $connection_string);
 
 if (!$conn) {
@@ -16,18 +17,36 @@ if (!$conn) {
 $email = $_POST['email'] ?? '';
 $input_password = $_POST['password'] ?? '';
 
+// Validate input
+if (empty($email) || empty($input_password)) {
+    echo "<script>alert('Please enter both email and password.'); window.location.href = 'login.html';</script>";
+    exit();
+}
+
 // Prepare and execute query
-$sql = "SELECT password FROM users WHERE email = :email";
+$sql = "SELECT password FROM USERS WHERE email = :email";
 $stid = oci_parse($conn, $sql);
 oci_bind_by_name($stid, ":email", $email);
 oci_execute($stid);
 
+// Fetch result
 $row = oci_fetch_assoc($stid);
+
+// Free resources and close connection
+oci_free_statement($stid);
 oci_close($conn);
 
+// Debugging (optional)
+// if ($row) {
+//     echo "Password in DB: " . $row['PASSWORD'] . "<br>";
+// } else {
+//     echo "No user found with that email!<br>";
+// }
+
+// Check login credentials
 if ($row && password_verify($input_password, $row['PASSWORD'])) {
-    // ✅ Login success
-    header("Location: dashboard.html");
+    // ✅ Login success - redirect to Customer/orders.html
+    header("Location: ../Customer/orders.html");
     exit();
 } else {
     // ❌ Login failed

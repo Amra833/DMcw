@@ -17,8 +17,9 @@
     <div class="login-container">
       <h2>Login to UrbanFood</h2>
       <form action="login_process.php" method="post">
-        <input type="text" placeholder="Username" required>
-        <input type="password" placeholder="Password" required>
+        <!-- Added name attributes to input fields -->
+        <input type="text" name="email" placeholder="Username" required>
+        <input type="password" name="password" placeholder="Password" required>
         <button type="submit">Login</button>
       </form>
       <p class="register-link">Don't have an account? <a href="register.html">Register here</a></p>
