@@ -1,3 +1,12 @@
+<?php
+include '../admin/connection.php'; // Oracle DB connection
+
+// Fetch all suppliers
+$query = "SELECT * FROM SUPPLIERS ORDER BY supplier_id DESC";
+$statement = oci_parse($conn, $query);
+oci_execute($statement);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,40 +37,26 @@
 
   <div class="icons">
     <a href="cart.html"><div class="fas fa-shopping-cart" id="cart-btn"></div></a>
-</div>
-
+  </div>
 </header>
 
 <!-- Supplier Section -->
 <section class="products" id="suppliers">
   <div class="hero-image">
-      <h1 class="heading"><span>Meet Our Trusted Suppliers</span></h1>
+    <h1 class="heading"><span>Meet Our Trusted Suppliers</span></h1>
   </div>
 
-<div class="box-container">
-  <div class="box">
-    <img src="../Images/farmerJohn.jpg" alt="Farmer John">
-    <h3>Farmer John</h3>
-    <p>Location: Kandy, Sri Lanka</p>
-    <p>Products: Tomatoes, Lettuce, Carrots</p>
+  <div class="box-container">
+    <?php while ($row = oci_fetch_assoc($statement)) { ?>
+      <div class="box">
+        <img src="../Images/<?php echo htmlspecialchars($row['SUP_PHOTO']); ?>" alt="<?php echo htmlspecialchars($row['SUP_FULLNAME']); ?>">
+        <h3><?php echo htmlspecialchars($row['SUP_FULLNAME']); ?></h3>
+        <p>Location: <?php echo htmlspecialchars($row['SUP_LOCATION']); ?></p>
+        <p>Products: <?php echo htmlspecialchars($row['SUP_PRODUCT']); ?></p>
+      </div>
+    <?php } ?>
   </div>
-
-  <div class="box">
-    <img src="../Images/pexels-akos-szabo-145938-440731.jpg" alt="Green Fields Co.">
-    <h3>Green Fields Co.</h3>
-    <p>Location: Nuwara Eliya, Sri Lanka</p>
-    <p>Products: Strawberries, Spinach, Broccoli</p>
-  </div>
-
-  <div class="box">
-    <img src="../Images/pexels-mark-thomas-2149938474-31550192.jpg" alt="Organic Harvest">
-    <h3>Organic Harvest</h3>
-    <p>Location: Galle, Sri Lanka</p>
-    <p>Products: Eggplants, Onions, Herbs</p>
-  </div>
-</div>
 </section>
-
 
 <!-- Footer -->
 <section class="footer">
@@ -98,8 +93,12 @@
 
 <!-- Swiper JS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-<!-- Custom JS -->
 <script src="home.js"></script>
 
 </body>
 </html>
+
+<?php
+oci_free_statement($statement);
+oci_close($conn);
+?>
