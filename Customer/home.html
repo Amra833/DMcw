@@ -113,6 +113,34 @@
         </div>
     </div>
 
+    <!-- Feedback section starts -->
+<section class="feedbacks" id="feedbacks">
+    <h1 class="heading">Share your <span>Feedback</span></h1>
+
+    <form action="submit_feedback.php" method="POST" class="feedback-form">
+        <div class="input-box">
+            <label for="name">Your Name</label>
+            <input type="text" name="name" id="name" placeholder="Enter your name" required>
+        </div>
+        
+        <div class="input-box">
+            <label for="email">Your Email</label>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required>
+        </div>
+        
+        <div class="input-box">
+            <label for="message">Your Feedback</label>
+            <textarea name="message" id="message" placeholder="Write your feedback here..." required></textarea>
+        </div>
+
+        <div class="input-box">
+            <button type="submit" class="btn">Submit Feedback</button>
+        </div>
+    </form>
+</section>
+<!-- Feedback section ends -->
+
+
     <!-- Footer -->
 <section class="footer">
     <div class="box-container">
