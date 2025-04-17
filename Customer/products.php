@@ -65,7 +65,9 @@ foreach ($categories as $category) {
         <div class="product-grid">
             <?php while ($row = oci_fetch_assoc($stmt)): ?>
                 <div class="product-card">
-                    <img src="../uploads/<?= htmlspecialchars($row['PRODUCT_IMAGE']) ?>" alt="<?= htmlspecialchars($row['PRODUCT_NAME']) ?>">
+                    <img src="../admin/uploads/<?= htmlspecialchars($row['PRODUCT_IMAGE']) ?>" 
+                         alt="<?= htmlspecialchars($row['PRODUCT_NAME']) ?>" 
+                         onerror="this.onerror=null;this.src='default.png';">
                     <h3><?= htmlspecialchars($row['PRODUCT_NAME']) ?></h3>
                     <p>Rs. <?= number_format($row['PRODUCT_PRICE'], 2) ?></p>
                     <button onclick="addToCart('<?= htmlspecialchars($row['PRODUCT_NAME']) ?>', <?= $row['PRODUCT_PRICE'] ?>)">Add to Cart</button>
