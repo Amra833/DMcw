@@ -1,12 +1,17 @@
 <?php
 // Database connection
-$connection = oci_connect("system", "system", "//localhost/XE"); // Replace with your details
+$connection = oci_connect("system", "system", "//localhost/XE");
 if (!$connection) {
     die("Connection failed: " . oci_error()['message']);
 }
 
-// Get the order_id from the URL
-$order_id = $_GET['order_id'];
+// Check if 'order_id' is passed in the URL
+if (isset($_GET['order_id'])) {
+    $order_id = $_GET['order_id'];
+    echo "<p>Order ID: $order_id</p>"; // Debugging output
+} else {
+    die("Order ID is missing.");
+}
 
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -24,6 +29,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     oci_bind_by_name($stmt, ':order_id', $order_id);
 
     if (oci_execute($stmt)) {
+        // Get the cart items (assuming cart is stored in cookies as a JSON string)
+        if (isset($_COOKIE['cart'])) {
+            $cart = json_decode($_COOKIE['cart'], true);  // Decode the cart JSON
+
+            // Insert cart items into the order_items table
+            foreach ($cart as $item) {
+                $product_id = $item['id'];
+                $price = $item['price'];
+                $quantity = $item['qty'];
+
+                $sql = "INSERT INTO order_items (ORDER_ID, PRODUCT_ID, PRICE, QUANTITY) 
+                        VALUES (:order_id, :product_id, :price, :quantity)";
+                $stmt = oci_parse($connection, $sql);
+                oci_bind_by_name($stmt, ':order_id', $order_id);
+                oci_bind_by_name($stmt, ':product_id', $product_id);
+                oci_bind_by_name($stmt, ':price', $price);
+                oci_bind_by_name($stmt, ':quantity', $quantity);
+                oci_execute($stmt);
+                oci_free_statement($stmt);
+            }
+        }
+
+        // Redirect to order confirmation page after successful order placement
         echo "<script>alert('Order placed successfully.');</script>";
         echo "<script>window.location.href = 'order_confirmation.php?order_id=$order_id';</script>";
     } else {
@@ -63,25 +91,30 @@ oci_close($connection);
   </div>
 </header>
 
-<!-- Payment & Delivery Form -->
-<section class="payment-delivery-form">
-  <form method="POST">
-    <h2>Choose Payment Method</h2>
-    <select name="payment_method" required>
-      <option value="Credit Card">Credit Card</option>
-      <option value="PayPal">PayPal</option>
-      <option value="Cash on Delivery">Cash on Delivery</option>
-    </select>
+<!-- Check if order_id is available and then display the form -->
+<?php if (isset($order_id)): ?>
+  <!-- Payment & Delivery Form -->
+  <section class="payment-delivery-form">
+    <form method="POST">
+      <h2>Choose Payment Method</h2>
+      <select name="payment_method" required>
+        <option value="Credit Card">Credit Card</option>
+        <option value="PayPal">PayPal</option>
+        <option value="Cash on Delivery">Cash on Delivery</option>
+      </select>
 
-    <h2>Choose Delivery Method</h2>
-    <select name="delivery_method" required>
-      <option value="Standard">Standard Delivery</option>
-      <option value="Express">Express Delivery</option>
-    </select>
+      <h2>Choose Delivery Method</h2>
+      <select name="delivery_method" required>
+        <option value="Standard">Standard Delivery</option>
+        <option value="Express">Express Delivery</option>
+      </select>
 
-    <button type="submit">Confirm Order</button>
-  </form>
-</section>
+      <button type="submit">Confirm Order</button>
+    </form>
+  </section>
+<?php else: ?>
+  <p>Error: Order ID is missing.</p>
+<?php endif; ?>
 
 </body>
 </html>

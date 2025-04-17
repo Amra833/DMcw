@@ -26,8 +26,14 @@ JOIN
 ORDER BY 
     o.ORDER_DATE DESC
 ";
+
 $stmt = oci_parse($connection, $sql);
-oci_execute($stmt);
+
+// Check if the SQL query executed successfully
+if (!oci_execute($stmt)) {
+    $e = oci_error($stmt);
+    die("SQL Error: " . $e['message']);
+}
 
 // Handle Order Status Update
 if (isset($_GET['update_status']) && isset($_GET['order_id'])) {
@@ -118,6 +124,7 @@ oci_close($connection);
       </thead>
       <tbody>
         <?php
+        // Fetch and display each order in the table
         while ($row = oci_fetch_assoc($stmt)) {
             echo "
             <tr>
