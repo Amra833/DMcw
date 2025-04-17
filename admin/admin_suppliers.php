@@ -10,7 +10,6 @@ if (isset($_GET['delete'])) {
     oci_bind_by_name($stmt, ":id", $id);
     oci_bind_by_name($stmt, ":result", $result, 4000);
     oci_execute($stmt);
-    echo $result;  // You can display the result message here
     header("Location: admin_suppliers.php");
     exit();
 }
@@ -21,14 +20,13 @@ if (isset($_POST['update_supplier'])) {
     $name = $_POST['sup_name'];
     $location = $_POST['sup_location'];
     $product = $_POST['sup_product'];
-    $photo = $_FILES['sup_photo']['name'];
+    $photo_path = '';
 
-    if (!empty($photo)) {
+    if (!empty($_FILES['sup_photo']['name'])) {
+        $photo = $_FILES['sup_photo']['name'];
         $photo_tmp = $_FILES['sup_photo']['tmp_name'];
-        move_uploaded_file($photo_tmp, "uploads/" . $photo);
-        $photo_path = "uploads/" . $photo;
-    } else {
-        $photo_path = "";  // Keeping empty if no new photo
+        $photo_path = "uploads/" . basename($photo);
+        move_uploaded_file($photo_tmp, $photo_path);
     }
 
     $sql = "BEGIN :result := update_supplier(:id, :name, :location, :product, :photo); END;";
@@ -40,7 +38,6 @@ if (isset($_POST['update_supplier'])) {
     oci_bind_by_name($stmt, ":photo", $photo_path);
     oci_bind_by_name($stmt, ":result", $result, 4000);
     oci_execute($stmt);
-    echo $result;  // You can display the result message here
     header("Location: admin_suppliers.php");
     exit();
 }
@@ -52,8 +49,8 @@ if (isset($_POST['add_supplier'])) {
     $product = $_POST['sup_product'];
     $photo = $_FILES['sup_photo']['name'];
     $photo_tmp = $_FILES['sup_photo']['tmp_name'];
-    move_uploaded_file($photo_tmp, "uploads/" . $photo);
-    $photo_path = "uploads/" . $photo;
+    $photo_path = "uploads/" . basename($photo);
+    move_uploaded_file($photo_tmp, $photo_path);
 
     $sql = "BEGIN :result := insert_supplier(:name, :location, :product, :photo); END;";
     $stmt = oci_parse($conn, $sql);
@@ -63,7 +60,6 @@ if (isset($_POST['add_supplier'])) {
     oci_bind_by_name($stmt, ":photo", $photo_path);
     oci_bind_by_name($stmt, ":result", $result, 4000);
     oci_execute($stmt);
-    echo $result;  // You can display the result message here
     header("Location: admin_suppliers.php");
     exit();
 }
@@ -80,6 +76,11 @@ oci_execute($result);
     <meta charset="UTF-8">
     <title>Admin | Manage Suppliers</title>
     <link rel="stylesheet" href="admin_suppliers.css">
+    <style>
+        img {
+            border-radius: 8px;
+        }
+    </style>
     <script>
         function toggleUpdateForm(id) {
             var form = document.getElementById('update_form_' + id);
@@ -123,21 +124,26 @@ oci_execute($result);
     </tr>
     <?php while ($row = oci_fetch_assoc($result)): ?>
         <tr>
-            <td><img src="uploads/<?= htmlspecialchars($row['SUP_PHOTO']) ?>" width="100"></td>
+            <td>
+                <?php if (!empty($row['SUP_PHOTO']) && file_exists($row['SUP_PHOTO'])): ?>
+                    <img src="<?= htmlspecialchars($row['SUP_PHOTO']) ?>" width="100" height="100">
+                <?php else: ?>
+                    <span>No Image</span>
+                <?php endif; ?>
+            </td>
             <td><?= htmlspecialchars($row['SUP_FULLNAME']) ?></td>
             <td><?= htmlspecialchars($row['SUP_LOCATION']) ?></td>
             <td><?= htmlspecialchars($row['SUP_PRODUCT']) ?></td>
             <td>
-                <!-- Update Button -->
                 <button type="button" onclick="toggleUpdateForm(<?= $row['SUPPLIER_ID'] ?>)">Update</button>
 
-                <!-- Delete Button -->
+                <!-- Delete -->
                 <form method="GET" style="display:inline-block;">
                     <input type="hidden" name="delete" value="<?= $row['SUPPLIER_ID'] ?>">
                     <input type="submit" value="Delete" onclick="return confirm('Are you sure to delete this supplier?');">
                 </form>
 
-                <!-- Update Form (Hidden by Default) -->
+                <!-- Update Form -->
                 <form id="update_form_<?= $row['SUPPLIER_ID'] ?>" method="POST" enctype="multipart/form-data" style="display:none;">
                     <input type="hidden" name="sup_id" value="<?= $row['SUPPLIER_ID'] ?>">
                     <input type="text" name="sup_name" value="<?= htmlspecialchars($row['SUP_FULLNAME']) ?>" required><br>
