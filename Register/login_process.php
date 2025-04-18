@@ -1,5 +1,7 @@
 <?php
-// Oracle connection setup
+session_start(); // Start the session
+
+// Oracle DB connection setup
 putenv("PATH=C:\\app\\user\\product\\21c\\dbhomeXE\\bin;" . getenv("PATH"));
 $username = 'system';         // Oracle DB username
 $password = 'system';         // Oracle DB password
@@ -36,20 +38,15 @@ $row = oci_fetch_assoc($stid);
 oci_free_statement($stid);
 oci_close($conn);
 
-// Debugging (optional)
-// if ($row) {
-//     echo "Password in DB: " . $row['PASSWORD'] . "<br>";
-// } else {
-//     echo "No user found with that email!<br>";
-// }
-
 // Check login credentials
 if ($row && password_verify($input_password, $row['PASSWORD'])) {
-    // ✅ Login success - redirect to Customer/orders.html
-    header("Location: ../Customer/orders.html");
+    // ✅ Login success - set session and redirect
+    $_SESSION['user_email'] = $email; // Store email in session
+    header("Location: ../Customer/orders.php");
     exit();
 } else {
     // ❌ Login failed
     echo "<script>alert('Invalid email or password'); window.location.href = 'login.html';</script>";
+    exit();
 }
 ?>

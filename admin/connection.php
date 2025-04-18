@@ -18,5 +18,5 @@ if (!$conn) {
     die("❌ Connection failed: " . $e['message']);
 }
 
-echo "✅ Connected successfully!";
+//echo "✅ Connected successfully!";
 ?>

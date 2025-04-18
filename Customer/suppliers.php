@@ -30,9 +30,10 @@ oci_execute($statement);
   <a href="#" class="logo"><i class="fas fa-shopping-basket"></i> UrbanFood</a>
 
   <nav class="navbar">
-    <a href="home.html">Home</a>
-    <a href="products.html">Products</a>
-    <a href="feedbacks.html">Feedbacks</a>
+  <a href="home.html">Home</a>
+    <a href="products.php">Products</a>
+    <a href="orders.php">Orders</a>
+    <a href="view_feedbacks.php">Customer Feedbacks</a>
   </nav>
 
   <div class="icons">
@@ -49,7 +50,16 @@ oci_execute($statement);
   <div class="box-container">
     <?php while ($row = oci_fetch_assoc($statement)) { ?>
       <div class="box">
-        <img src="../Images/<?php echo htmlspecialchars($row['SUP_PHOTO']); ?>" alt="<?php echo htmlspecialchars($row['SUP_FULLNAME']); ?>">
+        <?php 
+          // Fixed image path: image saved in admin/uploads/
+          $imagePath = "../admin/" . htmlspecialchars($row['SUP_PHOTO']);
+
+          // Fallback to default if missing or file not found
+          if (!file_exists($imagePath) || empty($row['SUP_PHOTO'])) {
+            $imagePath = "../Images/default-image.jpg";
+          }
+        ?>
+        <img src="<?php echo $imagePath; ?>" alt="<?php echo htmlspecialchars($row['SUP_FULLNAME']); ?>" width="100%" height="200px">
         <h3><?php echo htmlspecialchars($row['SUP_FULLNAME']); ?></h3>
         <p>Location: <?php echo htmlspecialchars($row['SUP_LOCATION']); ?></p>
         <p>Products: <?php echo htmlspecialchars($row['SUP_PRODUCT']); ?></p>

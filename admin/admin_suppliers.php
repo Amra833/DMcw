@@ -1,5 +1,12 @@
 <?php
 session_start();
+
+// Redirect to login page if not logged in
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header("Location: admin_login.php");
+    exit();
+}
+
 include 'connection.php'; // Oracle DB connection
 
 // Handle supplier delete
@@ -74,13 +81,227 @@ oci_execute($result);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>Admin | Manage Suppliers</title>
-    <link rel="stylesheet" href="admin_suppliers.css">
     <style>
-        img {
-            border-radius: 8px;
-        }
+     * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f2f5;
+}
+
+header {
+    background-color:rgb(127, 146, 182);
+    padding: 20px 30px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color:rgb(3, 25, 58);
+}
+
+.header .logo i{
+  color: #ff8800;
+}
+
+.navbar {
+    display: flex;
+    gap: 20px;
+    margin: 0 auto 10px;
+}
+
+.navbar a {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+    text-decoration: none;
+    color:rgb(223, 94, 8);
+}
+
+.header .icons div{
+  height: 2.5rem;
+  width: 3.5rem;
+  line-height: 2.5rem;
+  border-radius: .5rem;
+  background: #eee;
+  color: var(--black);
+  font-size: 2rem;
+  cursor: pointer;
+  margin-right: .3rem;
+  text-align: center;
+  margin: 0 auto -30px 300px;
+}
+
+.header .icons div:hover{
+    background:rgb(223, 94, 8);
+    color: #fff;
+    }
+
+    h2, h3 {
+        text-align: center;
+        color: #2c3e50;
+    }
+
+    /* Add Supplier Form */
+    form {
+        background-color: #ffffff;
+        padding: 20px;
+        margin: 20px auto;
+        border-radius: 10px;
+        max-width: 600px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    form label {
+        display: block;
+        margin-top: 10px;
+        font-weight: bold;
+        color: #34495e;
+    }
+
+    form input[type="text"],
+    form input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    form input[type="submit"] {
+        margin-top: 15px;
+        background-color:rgb(18, 57, 109);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        cursor: pointer;
+        border-radius: 6px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    form input[type="submit"]:hover {
+        background-color:rgb(21, 147, 151);
+    }
+
+    /* Supplier Table */
+    table {
+        margin: 30px auto;
+        width: 90%;
+        border-collapse: collapse;
+        background-color: #ffffff;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    table th, table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: center;
+    }
+
+    table th {
+        background-color:rgb(26, 96, 143);
+        color: white;
+    }
+
+    table tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    img {
+        max-width: 100px;
+        height: auto;
+        border-radius: 6px;
+    }
+
+    /* Update Form */
+    #update_form {
+        background-color: #f9f9f9;
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    #update_form input[type="text"],
+    #update_form input[type="file"] {
+        width: 100%;
+        padding: 10px;
+        margin-top: 5px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+    }
+
+    #update_form input[type="submit"] {
+        margin-top: 10px;
+        background-color: #f39c12;
+        color: white;
+        padding: 12px 20px;
+        cursor: pointer;
+        border-radius: 6px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    #update_form input[type="submit"]:hover {
+        background-color: #e67e22;
+    }
+
+    /* Button Styling */
+    button {
+        background-color: #3498db;
+        color: white;
+        padding: 8px 15px;
+        cursor: pointer;
+        border-radius: 6px;
+        border: none;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #2980b9;
+    }
+
+    input[type="submit"] {
+        background-color: #e74c3c;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #c0392b;
+    }
+
     </style>
+    <header class="header">
+    <a href="#" class="logo"><i class="fa fa-shopping-basket"></i> UrbanFood</a>
+    <nav class="navbar">
+      <a href="dashboard.php">Dashboard</a>
+      <a href="admin_products.php">Products</a>
+      <a href="admin_suppliers.php">Supplier Profiles</a>
+      <a href="admin_view_feedbacks.php">Customer Feedbacks</a>
+      <a href="admin_orders.php">Order Details</a>
+
+    <div class="icons">
+           <a href="logout.php"><div class="fa-solid fa-right-from-bracket"></div></a>
+    </div>
+    </nav>
+  </header>
+
     <script>
         function toggleUpdateForm(id) {
             var form = document.getElementById('update_form_' + id);

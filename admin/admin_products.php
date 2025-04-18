@@ -1,12 +1,18 @@
 <?php
 session_start();
+
+// Redirect to login page if not logged in
+if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header("Location: admin_login.php");
+    exit();
+}
+
 include 'connection.php'; // your Oracle DB connection
 
 $uploadDir = "uploads/";
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0777, true);
 }
-
 // Handle product insert
 if (isset($_POST['add_product'])) {
     $product_name = $_POST['product_name'];
@@ -94,78 +100,197 @@ oci_execute($result);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <title>Admin - Manage Products</title>
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            margin: 40px;
-            background-color: #f9f9f9;
-        }
+       * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        h2 {
-            color: #2c3e50;
-        }
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f0f2f5;
+}
 
-        form {
-            background: #fff;
-            padding: 20px;
-            margin-bottom: 40px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px #ccc;
-        }
+header {
+    background-color:rgb(127, 146, 182);
+    padding: 20px 30px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        label {
-            display: block;
-            margin-top: 10px;
-        }
+header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    text-decoration: none;
+    color:rgb(3, 25, 58);
+}
 
-        input, select {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-        }
+.header .logo i{
+  color: #ff8800;
+}
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px #ccc;
-        }
+.navbar {
+    display: flex;
+    gap: 20px;
+    margin: 0 auto 10px;
+}
 
-        th, td {
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-        }
+.navbar a {
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
 
-        img {
-            width: 100px;
-            height: auto;
-            border-radius: 6px;
-        }
+.navbar a:hover {
+    text-decoration: none;
+    color:rgb(223, 94, 8);
+}
 
-        .btn {
-            padding: 8px 15px;
-            text-decoration: none;
-            color: white;
-            border-radius: 5px;
-            margin: 3px;
-            display: inline-block;
-        }
+.header .icons div{
+  height: 2.5rem;
+  width: 3.5rem;
+  line-height: 2.5rem;
+  border-radius: .5rem;
+  background: #eee;
+  color: var(--black);
+  font-size: 2rem;
+  cursor: pointer;
+  margin-right: .3rem;
+  text-align: center;
+  margin: 0 auto -30px 300px;
+}
 
-        .btn-success { background-color: #28a745; }
-        .btn-danger { background-color: #dc3545; }
-        .btn-warning { background-color: #f39c12; }
+.header .icons div:hover{
+  background:rgb(223, 94, 8);
+  color: #fff;
+}
 
-        .table-actions a {
-            margin-right: 5px;
-        }
+h2, h3 {
+    color: #333;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+form {
+    background: #ffffff;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.08);
+    margin: 0 auto 40px;
+    max-width: 600px;
+}
+
+label {
+    display: block;
+    margin: 15px 0 5px;
+    color: #333;
+    font-weight: 500;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"],
+select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 15px;
+    background-color: #f9f9f9;
+}
+
+input[type="submit"],
+.btn {
+    padding: 10px 20px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.btn-success {
+    background-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+}
+
+.btn-warning {
+    background-color: #f39c12;
+}
+
+.btn-warning:hover {
+    background-color: #d68910;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+}
+
+table {
+    width: 70%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 8px rgba(0,0,0,0.05);
+    margin: 0 auto 40px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+th {
+    background-color: #2c3e50;
+    color: white;
+}
+
+img {
+    width: 90px;
+    border-radius: 8px;
+}
+
+.table-actions {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
     </style>
 </head>
 <body>
+<header class="header">
+    <a href="#" class="logo"><i class="fa fa-shopping-basket"></i> UrbanFood</a>
+    <nav class="navbar">
+      <a href="dashboard.php">Dashboard</a>
+      <a href="admin_products.php">Products</a>
+      <a href="admin_suppliers.php">Supplier Profiles</a>
+      <a href="admin_view_feedbacks.php">Customer Feedbacks</a>
+      <a href="admin_orders.php">Order Details</a>
+
+    <div class="icons">
+           <a href="logout.php"><div class="fa-solid fa-right-from-bracket"></div></a>
+    </div>
+    </nav>
+  </header>
 
 <h2>Admin - Product Management</h2>
 

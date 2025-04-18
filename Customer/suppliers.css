@@ -24,10 +24,6 @@
     scroll-padding-top: 7rem;
   }
   
-  body {
-    background: #f9f9f9;
-    padding-top: 10rem;
-  }
   
   /* Header */
   .header {
@@ -78,10 +74,10 @@
 }
 
 .hero-image {
-    background-image: url('../Images/pexels-picjumbo-com-55570-196643.jpg'); /* Replace with your hero image */
+    background-image: url('../Images/green\ image.jpg'); 
     background-size: cover;
     background-position: center;
-    padding: 100px 0; /* Adjust the padding to suit the height of the hero section */
+    padding: 100px 0; 
 }
 
 .hero-image h1 {
