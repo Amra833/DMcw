@@ -393,3 +393,24 @@ BEGIN
 END;
 /
 
+CREATE OR REPLACE FUNCTION get_total_income 
+RETURN NUMBER IS
+  total_income NUMBER;
+BEGIN
+  -- Calculate the total income for the current month
+  SELECT SUM(oi.subtotal)
+  INTO total_income
+  FROM order_items oi
+  JOIN orders o ON oi.order_id = o.order_id
+  WHERE EXTRACT(MONTH FROM o.order_date) = EXTRACT(MONTH FROM SYSDATE)
+  AND EXTRACT(YEAR FROM o.order_date) = EXTRACT(YEAR FROM SYSDATE);
+
+  -- Return the total income
+  RETURN total_income;
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    RETURN 0;  -- If no data is found, return 0
+  WHEN OTHERS THEN
+    RETURN NULL;  -- Handle any other errors
+END;
+/

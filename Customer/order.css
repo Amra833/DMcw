@@ -8,207 +8,195 @@
     --border:.2rem solid rgba(0,0,0,.1);
     --outline:.1rem solid rgba(0,0,0,.1);
     --outline-hover:.2rem solid var(--black);
-    --orange:#ff7800;
     --green: #27ae60;
     --light-green: #dff5e3;
     --light-orange:#e2b083;
     --dark: #222;
     --white: #fff;
     --gray: #777;
-    --border: 0.1rem solid rgba(0, 0, 0, 0.1);
-}      
-*{
+}
+
+* {
     font-family: "Poppins", sans-serif;
-    margin: 0;padding: 0;
+    margin: 0; padding: 0;
     box-sizing: border-box;
-    outline: none;border: none;
+    outline: none; border: none;
     text-decoration: none;
     text-transform: capitalize;
     transition: all .2s linear;
-
 }
 
-html{
-  font-size: 62.5%;
-  scroll-behavior: smooth;
-  scroll-padding-top: 7rem;
+html {
+    font-size: 62.5%;
+    scroll-behavior: smooth;
+    scroll-padding-top: 7rem;
 }
-
-/*body {
-  background: #f9f9f9;
-  padding-top: 10rem;
-}*/
 
 body {
-  background: url('https://www.transparenttextures.com/patterns/green-cup.png');
-  background-color: #f9f9f9;
-  padding-top: 10rem;
-  background-attachment: fixed;
+    background: url('https://www.transparenttextures.com/patterns/green-cup.png');
+    background-color: #f9f9f9;
+    padding-top: 10rem;
+    background-attachment: fixed;
 }
-
 
 /* Header */
 .header {
-  position: fixed;
-  top: 0;left: 0;right: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2rem 9%;
-  background: #fff;
-  box-shadow: var(--box-shadow);
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 9%;
+    background: #fff;
+    box-shadow: var(--box-shadow);
 }
 
 .header .logo {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: var(--black);
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: var(--black);
 }
 
-.header .logo i{
-  margin-right: 0.5rem;
-  color: var(--orange);
+.header .logo i {
+    margin-right: 0.5rem;
+    color: var(--orange);
 }
 
-.header .navbar a{
-  font-size: 1.6rem;
-  margin: 0 1.2rem;
-  color: var(--dark);
+.header .navbar a {
+    font-size: 1.6rem;
+    margin: 0 1.2rem;
+    color: var(--dark);
 }
 
-.header .navbar a:hover{
-  color: var(--orange);
+.header .navbar a:hover {
+    color: var(--orange);
 }
 
-.header .icons div{
-  height: 4.5rem;
-  width: 4.5rem;
-  line-height: 4.5rem;
-  border-radius: .5rem;
-  background: #eee;
-  color: var(--black);
-  font-size: 2rem;
-  cursor: pointer;
-  margin-right: .3rem;
-  text-align: center;
+.header .icons div {
+    height: 4.5rem;
+    width: 4.5rem;
+    line-height: 4.5rem;
+    border-radius: .5rem;
+    background: #eee;
+    color: var(--black);
+    font-size: 2rem;
+    cursor: pointer;
+    margin-right: .3rem;
+    text-align: center;
 }
 
-.header .icons div:hover{
-  background: var(--orange);
-  color: #fff;
-}
-
-.header .shopping-cart{
-  position: absolute;
-  top:110%; right: -110%;
-  padding: 1rem;
-  border-radius: .5rem;
-  box-shadow: var(--box-shadow);
-  width: 35rem;
-  background: #fff;
-}
-
-/* Section Titles */
-/*section h2 {
-  font-size: 2.4rem;
-  margin-bottom: 15px;
-  color: #2c3e50;
-}*/
-
-.cart-summary h2,
-.order-form h2 {
-  font-size: 3rem;
-  font-weight: 700;
-  color: var(--dark);
-  margin-bottom: 2rem;
+.header .icons div:hover {
+    background: var(--orange);
+    color: #fff;
 }
 
 /* Cart Summary Section */
 .cart-summary {
-  font-size: 1.6rem;
-  background: var(--white);
-  padding: 3rem;
-  border-radius: 1.2rem;
-  margin: 3rem auto;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-  max-width: 1000px;
+    font-size: 1.6rem;
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 1.2rem;
+    margin: 3rem auto;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    max-width: 1000px;
+}
+
+.cart-summary h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2rem;
 }
 
 .cart-summary table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-bottom: 2rem;
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
 }
 
 .cart-summary th,
 .cart-summary td {
-  border: 1px solid var(--gray);
-  padding: 1.5rem;
-  text-align: center;
-  font-size: 1.7rem;
+    border: 1px solid var(--gray);
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.7rem;
 }
 
 .cart-summary th {
-  background-color: var(--light-orange);
-  color: var(--black);
-  font-weight: 600;
+    background-color: var(--light-orange);
+    color: var(--black);
+    font-weight: 600;
 }
 
 .cart-summary p {
-  font-size: 2rem;
-  text-align: right;
+    font-size: 2rem;
+    text-align: right;
 }
 
 /* Order Form Section */
 .order-form {
-  background: var(--white);
-  padding: 3rem;
-  border-radius: 1.2rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
-  max-width: 800px;
-  margin: 0 auto 4rem auto;
+    background: var(--white);
+    padding: 3rem;
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    max-width: 800px;
+    margin: 0 auto 4rem auto;
+}
+
+.order-form h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2rem;
 }
 
 .order-form form label {
-  display: block;
-  margin-top: 2rem;
-  font-weight: 600;
-  color: var(--black);
-  font-size: 1.8rem;
+    display: block;
+    margin-top: 2rem;
+    font-weight: 600;
+    color: var(--black);
+    font-size: 1.8rem;
 }
 
 .order-form form input,
-.order-form form textarea {
-  width: 100%;
-  padding: 1.5rem;
-  margin-top: 0.8rem;
-  border-radius: 0.8rem;
-  border: 1px solid #ccc;
-  font-size: 1.7rem;
-  background-color: #fdfdfd;
-  transition: border 0.3s;
+.order-form form textarea,
+.order-form form select {
+    width: 100%;
+    padding: 1.5rem;
+    margin-top: 0.8rem;
+    border-radius: 0.8rem;
+    border: 1px solid #ccc;
+    font-size: 1.7rem;
+    background-color: #fdfdfd;
+    transition: border 0.3s;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
 }
 
 .order-form form input:focus,
-.order-form form textarea:focus {
-  border: 1.5px solid var(--green);
-  outline: none;
+.order-form form textarea:focus,
+.order-form form select:focus {
+    border: 1.5px solid var(--green);
+    outline: none;
 }
 
 .order-form form button {
-  margin-top: 3rem;
-  background-color: var(--green);
-  color: white;
-  border: none;
-  padding: 1.5rem 3rem;
-  font-size: 1.8rem;
-  border-radius: 0.8rem;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 3rem;
+    background-color: var(--green);
+    color: white;
+    border: none;
+    padding: 1.5rem 3rem;
+    font-size: 1.8rem;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    display: block;
+    width: 100%;
 }
 
 .order-form form button:hover {
-  background-color: #219653;
-  transform: scale(1.02);
+    background-color: #219653;
+    transform: scale(1.02);
 }

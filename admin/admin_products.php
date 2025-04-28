@@ -23,26 +23,29 @@ if (isset($_POST['add_product'])) {
     $product_id = time(); // unique ID
 
     if (move_uploaded_file($temp_name, $uploadDir . $product_image)) {
-        $sql = "INSERT INTO PRODUCTS (product_id, product_name, product_price, product_image, category) 
-                VALUES (:id, :name, :price, :image, :category)";
+        $sql = "BEGIN insert_product (:name, :price, :category, :image, :result); END;";
         $stmt = oci_parse($conn, $sql);
-        oci_bind_by_name($stmt, ":id", $product_id);
         oci_bind_by_name($stmt, ":name", $product_name);
         oci_bind_by_name($stmt, ":price", $product_price);
-        oci_bind_by_name($stmt, ":image", $product_image);
         oci_bind_by_name($stmt, ":category", $product_category);
+        oci_bind_by_name($stmt, ":image", $product_image);
+        oci_bind_by_name($stmt, ":result", $result, 100);
         oci_execute($stmt);
     } else {
         echo "<p style='color:red;'>Image upload failed!</p>";
     }
 }
 
+
 // Handle product delete
 if (isset($_GET['delete'])) {
     $product_id = $_GET['delete'];
-    $sql = "DELETE FROM PRODUCTS WHERE product_id = :id";
+
+    $sql = "BEGIN delete_product(:id, :result); END;";
     $stmt = oci_parse($conn, $sql);
     oci_bind_by_name($stmt, ":id", $product_id);
+    oci_bind_by_name($stmt, ":result", $result, 100);
+
     oci_execute($stmt);
     header("Location: admin_products.php");
     exit();
@@ -71,20 +74,21 @@ if (isset($_POST['update_product'])) {
         $product_image = $_FILES['product_image']['name'];
         $temp_name = $_FILES['product_image']['tmp_name'];
         move_uploaded_file($temp_name, $uploadDir . $product_image);
-        $sql = "UPDATE PRODUCTS SET product_name = :name, product_price = :price, category = :category, product_image = :image WHERE product_id = :id";
     } else {
         $product_image = $edit_product['PRODUCT_IMAGE'];
-        $sql = "UPDATE PRODUCTS SET product_name = :name, product_price = :price, category = :category WHERE product_id = :id";
     }
-
+    
+    // Now calling the procedure
+    $sql = "BEGIN update_product(:id, :name, :price, :category, :image, :result); END;";
     $stmt = oci_parse($conn, $sql);
+    
     oci_bind_by_name($stmt, ":id", $product_id);
     oci_bind_by_name($stmt, ":name", $product_name);
     oci_bind_by_name($stmt, ":price", $product_price);
     oci_bind_by_name($stmt, ":category", $product_category);
-    if ($_FILES['product_image']['name']) {
-        oci_bind_by_name($stmt, ":image", $product_image);
-    }
+    oci_bind_by_name($stmt, ":image", $product_image);
+    oci_bind_by_name($stmt, ":result", $result, 100);
+    
     oci_execute($stmt);
     header("Location: admin_products.php");
     exit();

@@ -23,18 +23,18 @@ oci_execute($result_count_orders);
 $row_count_orders = oci_fetch_assoc($result_count_orders);
 $total_orders = $row_count_orders['TOTAL_ORDERS'] ?? 0;
 
-// Fetch the total income for this month using order_items and orders
-$query_income = "
-    SELECT SUM(oi.subtotal) AS total_income
-    FROM order_items oi
-    JOIN orders o ON oi.order_id = o.order_id
-    WHERE EXTRACT(MONTH FROM o.order_date) = EXTRACT(MONTH FROM SYSDATE)
-    AND EXTRACT(YEAR FROM o.order_date) = EXTRACT(YEAR FROM SYSDATE)
-";
-$result_income = oci_parse($conn, $query_income);
-oci_execute($result_income);
-$row_income = oci_fetch_assoc($result_income);
-$total_income = $row_income['TOTAL_INCOME'] ?? 0;
+// Call the PL/SQL function to get the total income for the current month
+$query_income = "BEGIN :total_income := get_total_income; END;";
+$stid_income = oci_parse($conn, $query_income);
+
+// Bind the output variable for total income
+oci_bind_by_name($stid_income, ":total_income", $total_income, 32);
+
+// Execute the query
+oci_execute($stid_income);
+
+// Close the statement
+oci_free_statement($stid_income);
 ?>
 
 <!DOCTYPE html>
